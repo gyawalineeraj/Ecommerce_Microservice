@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: Product-Service
+  profiles:
+    active:
+      - dev
+
+

@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ng-ecommerce
+  profiles:
+    active:
+      - dev
