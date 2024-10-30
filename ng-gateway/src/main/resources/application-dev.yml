@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ng-ecommerce
+          predicates:
+            - Path=/main/**
+          uri: lb://Ng-Ecommerce
+        - id: eureka-web-client
+          predicates:
+              - Path=/eureka/web
+          uri: http://localhost:8761/
+          filters:
+            - SetPath=/
