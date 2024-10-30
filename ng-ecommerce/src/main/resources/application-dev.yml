@@ -7,6 +7,26 @@ spring:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-server:
-  port: 8080
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/NG
+      client:
+        registration:
+          client:
+            clientId: ng-ecommerce
+            clientSecret: gmUyVP1fuZXJGOq9Be7fAKAPGuIwpNN9
+            authorizationGrantType: client_credentials
+            provider: keycloak-provider  # Refers to the provider defined below
+        provider:
+          keycloak-provider:
+            token-uri: http://localhost:9090/realms/NG/protocol/openid-connect/token
 
+server:
+  port: 8081
+  servlet:
+    context-path: /main/
+logging:
+  level:
+    com.ng.ngmicrosrvices.ng_ecommerce.httpclient: DEBUG

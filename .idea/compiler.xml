@@ -11,9 +11,11 @@
         <module name="library" />
         <module name="ng-ecommerce" />
         <module name="review-service" />
+        <module name="ng-gateway" />
         <module name="purchase-service" />
         <module name="ng-eureka-server" />
         <module name="product-service" />
+        <module name="ng-erurek-server" />
       </profile>
     </annotationProcessing>
   </component>
@@ -21,7 +23,9 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="cart-service" options="-parameters" />
       <module name="ng-ecommerce" options="-parameters" />
+      <module name="ng-erurek-server" options="-parameters" />
       <module name="ng-eureka-server" options="-parameters" />
+      <module name="ng-gateway" options="-parameters" />
       <module name="product-service" options="-parameters" />
       <module name="purchase-service" options="-parameters" />
       <module name="review-service" options="-parameters" />

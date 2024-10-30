@@ -1,5 +1,6 @@
 package com.ng.ngmicrosrvices.cart_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ng.library.entities.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class UserProduct extends BaseEntity {
 
-    @Column(unique = true)
+
     private String email;
 
     private int quantity;
@@ -24,5 +25,6 @@ public class UserProduct extends BaseEntity {
     private int productId;
 
     @ManyToOne
+    @JsonIgnore
     private Cart cart;
 }

@@ -9,9 +9,16 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic topic(){
+    public NewTopic deleteProductTopic(){
         return TopicBuilder
                 .name("delete-product")
+                .partitions(3)
+                .build();
+    }
+    @Bean
+    public NewTopic addProductTopic(){
+        return TopicBuilder
+                .name("add-product")
                 .partitions(3)
                 .build();
     }

@@ -28,5 +28,5 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
             DELETE FROM Product p
             WHERE p.id = :productId
             """)
-    void deleteProductById(int productID);
+    void deleteProductById(int productId);
 }

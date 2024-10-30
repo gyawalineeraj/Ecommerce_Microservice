@@ -1,6 +1,8 @@
 package com.ng.ngmicrosrvices.cart_service.controller;
 
 
+import com.ng.library.dto.UserProductDto;
+import com.ng.ngmicrosrvices.cart_service.entity.UserProduct;
 import com.ng.ngmicrosrvices.cart_service.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +15,14 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/cart")
 @RequiredArgsConstructor
 public class CartController {
 
     private final CartService cartService;
 
     @PutMapping("/add-to-cart")
-    public ResponseEntity<?> addToCart(@RequestHeader int productId,
+    public ResponseEntity<String> addToCart(@RequestHeader int productId,
                                        @RequestHeader String userEmail)
             throws ExecutionException, InterruptedException {
         cartService.addToCart(productId,userEmail);
@@ -40,7 +42,7 @@ public class CartController {
         return ResponseEntity.ok("Product Quantity decreased  in the cart successfully");
     }
     @PutMapping("/get-products-in-cart")
-    public List getProductsinCart(String userEmail){
+    public List<UserProductDto> getProductsinCart(String userEmail){
         return cartService.getProductsIncart(userEmail);
     }
 

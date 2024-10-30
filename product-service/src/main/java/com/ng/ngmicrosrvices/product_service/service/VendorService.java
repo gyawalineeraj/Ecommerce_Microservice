@@ -25,12 +25,7 @@ public class VendorService {
     private final ProductMapper productMapper;
     private final CustomMapper customMapper;
 
-    public void addProduct(ProductDto productDto, MultipartFile image, String vendorEmail) {
-        Product product = productMapper.toProduct(productDto,vendorEmail);
-        String imagePath = imageService.saveImage(image, vendorEmail, product.getId());
-        product.setProductImage(imagePath);
-        productRepository.save(product);
-    }
+
 
 
 

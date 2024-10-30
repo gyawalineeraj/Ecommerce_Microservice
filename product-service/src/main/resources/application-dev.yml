@@ -18,12 +18,25 @@ spring:
   properties:
     hibernate:
       format_sql: true
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/NG
   application:
     imageFolder: ./images
 
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
+      group-id: my-product
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+
 server:
-  port: 8003
+  port: 8000

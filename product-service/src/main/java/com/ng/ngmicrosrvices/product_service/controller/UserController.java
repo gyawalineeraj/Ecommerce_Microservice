@@ -17,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/get-products")
-    public ProductPaginationResponse getVendorProducts(
+    public ProductPaginationResponse getUserProducts(
             @RequestParam(required = false, defaultValue = "10") int size,
             @RequestParam(required = true) int page) {
 

@@ -25,25 +25,26 @@ public class ImageService {
     private String imageFolderPath;
     private final ProductRepository productRepository;
 
-    public String saveImage(@NonNull MultipartFile image, @NonNull String vendorEmail,
-                           int productId) {
+    public String saveImage(@NonNull byte[] image,
+                            @NonNull String vendorEmail,
+                            @NonNull Integer productId,
+                            @NonNull String fileExtension ) {
         String vendorEmailName = getVendorEmailName(vendorEmail);
         final String finalFolderPath = imageFolderPath + separator + vendorEmailName;
         File targetFolder = new File(finalFolderPath);
         if (!targetFolder.exists()) {
             boolean folderCreated = targetFolder.mkdirs();
         }
-        return uploadImageToServer(image,finalFolderPath,productId);
+        return uploadImageToServer(image,finalFolderPath,productId,fileExtension);
 
     }
 
-    private String uploadImageToServer(@NonNull MultipartFile image, String finalFolderPath,
-                                     int productId) {
-        String fileExtenstion = getFileExtenstion(image.getOriginalFilename());
-        String finalFilePath = finalFolderPath + separator + productId + "." + fileExtenstion;
+    private String uploadImageToServer( byte[] image, String finalFolderPath,
+                                     int productId,String fileExtension) {
+        String finalFilePath = finalFolderPath + separator + productId + "." + fileExtension;
         Path targetPath = Paths.get(finalFilePath);
         try {
-            Files.write(targetPath,image.getBytes());
+            Files.write(targetPath,image);
             return finalFilePath;
         } catch (IOException e) {
             throw new RuntimeException("Could not save the product Image , Please Try again");
@@ -51,10 +52,6 @@ public class ImageService {
 
     }
 
-    private String getFileExtenstion(String originalFilename) {
-        int lastIndexOf = originalFilename.lastIndexOf(".");
-        return originalFilename.substring(lastIndexOf + 1);
-    }
 
     private String getVendorEmailName(String vendorEmail) {
 

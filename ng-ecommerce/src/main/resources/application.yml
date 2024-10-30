@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ng-ecommerce
+    name: Ng-Ecommerce
   profiles:
     active:
       - dev
