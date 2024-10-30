@@ -9,6 +9,8 @@ public class FeignConfig {
 
     @Bean
     Logger.Level feignLoggerLevel() {
+        System.out.println("hello");
+
         return Logger.Level.FULL;
     }
 }
