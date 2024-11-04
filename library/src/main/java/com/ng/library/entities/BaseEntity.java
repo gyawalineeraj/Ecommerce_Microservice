@@ -34,4 +34,7 @@ public class BaseEntity {
     private LocalDateTime modifiedAt;
 
 
+
+
+
 }
