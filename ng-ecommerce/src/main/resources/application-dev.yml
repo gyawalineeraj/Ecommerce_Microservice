@@ -23,6 +23,20 @@ spring:
           keycloak-provider:
             token-uri: http://localhost:9090/realms/NG/protocol/openid-connect/token
 
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      userGetProduct:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+
+
 server:
   port: 8081
   servlet:
@@ -30,3 +44,9 @@ server:
 logging:
   level:
     com.ng.ngmicrosrvices.ng_ecommerce.httpclient: DEBUG
+    io.github.resilience4j.circuitbreaker: DEBUG
+management:
+  endpoints.web.exposure.include:
+    - '*'
+  endpoint.health.show-details: always
+  health.circuitbreakers.enabled: true

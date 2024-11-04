@@ -6,6 +6,8 @@ import com.ng.library.dto.UserProductDto;
 import com.ng.library.response.ProductPaginationResponse;
 import com.ng.ngmicrosrvices.ng_ecommerce.httpclient.CartServiceClient;
 import com.ng.ngmicrosrvices.ng_ecommerce.httpclient.ProductServiceClient;
+import com.ng.ngmicrosrvices.ng_ecommerce.service.UserService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +19,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final ProductServiceClient productServiceClient;
+    private final UserService userService;
     private final CartServiceClient cartServiceClient;
+    private final ProductServiceClient productServiceClient;
 
     @GetMapping("/get-products")
     public ProductPaginationResponse getUserProducts(
             @RequestParam(required = false, defaultValue = "10") int size,
             @RequestParam(required = true) int page){
-        return productServiceClient.getUserProducts(size,page);
+        return userService.getProducts(size,page);
+
     }
 
     @PutMapping("/add-to-cart")
@@ -54,6 +58,9 @@ public class UserController {
                 .map((userProductDto -> userProductDto.getProductId())).toList();
         return productServiceClient.findProducts(productIdListOfCart);
     }
+
+
+
 
 
 }
