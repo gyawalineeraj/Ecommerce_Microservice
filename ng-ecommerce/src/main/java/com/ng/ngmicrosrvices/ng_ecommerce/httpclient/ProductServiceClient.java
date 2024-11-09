@@ -36,6 +36,8 @@ public interface ProductServiceClient {
             @RequestParam(required = true) int page);
 
 
+
+
     @GetMapping("product/find-products")
     public List<ProductResponseDto> findProducts(List<Integer> productIdlist);
 }
