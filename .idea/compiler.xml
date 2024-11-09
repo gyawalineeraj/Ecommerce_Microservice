@@ -10,7 +10,6 @@
         <module name="cart-service" />
         <module name="library" />
         <module name="ng-ecommerce" />
-        <module name="review-service" />
         <module name="ng-gateway" />
         <module name="purchase-service" />
         <module name="ng-eureka-server" />
@@ -18,6 +17,9 @@
         <module name="ng-erurek-server" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="review-service" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

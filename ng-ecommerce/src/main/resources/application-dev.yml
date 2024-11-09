@@ -24,16 +24,35 @@ spring:
             token-uri: http://localhost:9090/realms/NG/protocol/openid-connect/token
 
 
+#resilience4j:
+#  circuitbreaker:
+#    instances:
+#      getUserProduct:
+#        slidingWindowType: COUNT_BASED
+#        slidingWindowSize: 5
+#        failureRateThreshold: 50
+#        waitDurationInOpenState: 10000
+#        permittedNumberOfCallsInHalfOpenState: 3
+#        automaticTransitionFromOpenToHalfOpenEnabled: true
+
 resilience4j:
   circuitbreaker:
-    instances:
-      userGetProduct:
+    configs:
+      default:
+        failureRateThreshold: 50
+        registerHealthIndicator: true
+        allowHealthIndicatorToFail: false
         slidingWindowType: COUNT_BASED
         slidingWindowSize: 5
-        failureRateThreshold: 50
-        waitDurationInOpenState: 10000
+        waitDurationInOpenState: 50000
         permittedNumberOfCallsInHalfOpenState: 3
-        automaticTransitionFromOpenToHalfOpenEnabled: true
+  retry:
+    configs:
+      default:
+        maxAttempts: 3
+        waitDuration: 1000
+        retryExceptions:
+          - java.lang.Exception
 
 
 
@@ -43,10 +62,13 @@ server:
     context-path: /main/
 logging:
   level:
-    com.ng.ngmicrosrvices.ng_ecommerce.httpclient: DEBUG
+#    io.github.resilience4j.retry: DEBUG
+#    com.ng.ngmicrosrvices.ng_ecommerce.httpclient: DEBUG
     io.github.resilience4j.circuitbreaker: DEBUG
+    io.github.resilience4j.retry: DEBUG
 management:
   endpoints.web.exposure.include:
     - '*'
   endpoint.health.show-details: always
   health.circuitbreakers.enabled: true
+

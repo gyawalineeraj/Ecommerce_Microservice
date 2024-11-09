@@ -20,8 +20,7 @@ public class UserController {
     public ProductPaginationResponse getUserProducts(
             @RequestParam(required = false, defaultValue = "10") int size,
             @RequestParam(required = true) int page) {
-            throw new RuntimeException("checking somehing");
-//        return userService.getUserProducts(size,page);
+        return userService.getUserProducts(size,page);
 
     }
 

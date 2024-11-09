@@ -21,7 +21,7 @@ public class SecurityFilterChainConfig {
         http.authorizeHttpRequests(c -> c
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/vendor/**").hasRole("VENDOR")
-                        .anyRequest().authenticated());
+                        .anyRequest().permitAll());
 
         http.oauth2ResourceServer(c -> c
                 .jwt(j -> j.jwtAuthenticationConverter(customJwtConverter)));
